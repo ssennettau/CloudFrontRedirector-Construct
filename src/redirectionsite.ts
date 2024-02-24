@@ -30,41 +30,43 @@ export class RedirectionSite extends Construct {
 
     // Looks up the Hosted Zone, if set
     if (typeof props.customDomain?.hostedZone === 'string') {
-      hostedZone = route53.HostedZone.fromLookup(this, 'hostedZone', {
+        hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
         domainName: props.customDomain?.hostedZone,
       });
     } else if (props.customDomain?.hostedZone instanceof route53.HostedZone) {
       hostedZone = props.customDomain?.hostedZone;
     }
 
-    const distribution = new cloudfront.Distribution(this, 'RedirectDistribution', {
-      defaultBehavior: {
-        origin: new cloudfrontOrigins.S3Origin(new s3.Bucket(
-          this, 'StubBucket', { removalPolicy: cdk.RemovalPolicy.DESTROY })),
-        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
-        functionAssociations: [{
-          function: new cloudfront.Function(this, 'RedirectFunction', {
-            code: cloudfront.FunctionCode.fromInline(`
-                            function handler(event) {
-                                var response = {
-                                    statusCode: 302,
-                                    statusDescription: "Found",
-                                    headers: {
-                                        'location': { value: "${props.targetUrl}" },
-                                        'cloudfront-functions': { value: "redirect" }
-                                    }
-                                };
-                                return response;
-                            }
-                        `),
-            runtime: cloudfront.FunctionRuntime.JS_2_0,
-          }),
+      const functionRedirect = new cloudfront.Function(this, 'RedirectFunction', {
+          code: cloudfront.FunctionCode.fromInline(`
+                function handler(event) {
+                    var response = {
+                        statusCode: 302,
+                        statusDescription: "Found",
+                        headers: {
+                            'location': { value: "${props.targetUrl}" },
+                            'cloudfront-functions': { value: "redirect" }
+                        }
+                    };
+                    return response;
+                }
+            `),
+          runtime: cloudfront.FunctionRuntime.JS_2_0,
+    });
+
+      const distribution = new cloudfront.Distribution(this, 'RedirectDistribution', {
+          defaultBehavior: {
+              origin: new cloudfrontOrigins.S3Origin(new s3.Bucket(
+                  this, 'StubBucket', { removalPolicy: cdk.RemovalPolicy.DESTROY })),
+              viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+              responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
+              functionAssociations: [{
+                  function: functionRedirect,
           eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
         }],
       },
       domainNames: (hostedZone && props.customDomain) ? [props.customDomain?.domainName] : undefined,
-      certificate: (hostedZone && props.customDomain) ? new acm.Certificate(this, 'redirectCertificate', {
+        certificate: (hostedZone && props.customDomain) ? new acm.Certificate(this, 'RedirectCertificate', {
         domainName: props.customDomain.domainName,
         validation: acm.CertificateValidation.fromDns(hostedZone),
       }) : undefined,
