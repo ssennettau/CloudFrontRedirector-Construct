@@ -9,13 +9,13 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 
 export interface RedirectionSiteProps {
-  targetUrl: string;
-  customDomain?: CustomDomainProps;
+  readonly targetUrl: string;
+  readonly customDomain?: CustomDomainProps;
 }
 
-interface CustomDomainProps {
-  domainName: string;
-  hostedZone: route53.IHostedZone | string;
+export interface CustomDomainProps {
+  readonly domainName: string;
+  readonly hostedZone: route53.IHostedZone | string;
   // TODO: Validation
 }
 
@@ -30,15 +30,15 @@ export class RedirectionSite extends Construct {
 
     // Looks up the Hosted Zone, if set
     if (typeof props.customDomain?.hostedZone === 'string') {
-        hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
+      hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
         domainName: props.customDomain?.hostedZone,
       });
     } else if (props.customDomain?.hostedZone instanceof route53.HostedZone) {
       hostedZone = props.customDomain?.hostedZone;
     }
 
-      const functionRedirect = new cloudfront.Function(this, 'RedirectFunction', {
-          code: cloudfront.FunctionCode.fromInline(`
+    const functionRedirect = new cloudfront.Function(this, 'RedirectFunction', {
+      code: cloudfront.FunctionCode.fromInline(`
                 function handler(event) {
                     var response = {
                         statusCode: 302,
@@ -51,22 +51,22 @@ export class RedirectionSite extends Construct {
                     return response;
                 }
             `),
-          runtime: cloudfront.FunctionRuntime.JS_2_0,
+      runtime: cloudfront.FunctionRuntime.JS_2_0,
     });
 
-      const distribution = new cloudfront.Distribution(this, 'RedirectDistribution', {
-          defaultBehavior: {
-              origin: new cloudfrontOrigins.S3Origin(new s3.Bucket(
-                  this, 'StubBucket', { removalPolicy: cdk.RemovalPolicy.DESTROY })),
-              viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-              responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
-              functionAssociations: [{
-                  function: functionRedirect,
+    const distribution = new cloudfront.Distribution(this, 'RedirectDistribution', {
+      defaultBehavior: {
+        origin: new cloudfrontOrigins.S3Origin(new s3.Bucket(
+          this, 'StubBucket', { removalPolicy: cdk.RemovalPolicy.DESTROY })),
+        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS,
+        functionAssociations: [{
+          function: functionRedirect,
           eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
         }],
       },
       domainNames: (hostedZone && props.customDomain) ? [props.customDomain?.domainName] : undefined,
-        certificate: (hostedZone && props.customDomain) ? new acm.Certificate(this, 'RedirectCertificate', {
+      certificate: (hostedZone && props.customDomain) ? new acm.Certificate(this, 'RedirectCertificate', {
         domainName: props.customDomain.domainName,
         validation: acm.CertificateValidation.fromDns(hostedZone),
       }) : undefined,
