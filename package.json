@@ -3,7 +3,7 @@
   "description": "CDK Construct to simplify using CloudFront to redirect entire domains or back-half stubs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ssennett/CloudFrontRedirector-Construct.git"
+    "url": "https://github.com/ssennettau/CloudFrontRedirector-Construct.git"
   },
   "scripts": {
     "build": "npx projen build",
