@@ -1,5 +1,6 @@
 {
-  "name": "CloudFrontRedirector-Construct",
+  "name": "cloudfrontredirector",
+  "description": "CDK Construct to simplify using CloudFront to redirect entire domains or path stubs",
   "repository": {
     "type": "git",
     "url": "https://github.com/ssennett/CloudFrontRedirector-Construct.git"
@@ -38,7 +39,7 @@
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
-    "aws-cdk-lib": "2.1.0",
+    "aws-cdk-lib": "2.127.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -57,7 +58,7 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.1.0",
+    "aws-cdk-lib": "^2.127.0",
     "constructs": "^10.0.5"
   },
   "keywords": [
