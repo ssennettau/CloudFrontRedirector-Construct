@@ -182,6 +182,63 @@ Hosted Zone to use for the redirector (used as the record set zone).
 ```
 
 
+### CustomPath <a name="CustomPath" id="cdk-cloudfront-redirector.CustomPath"></a>
+
+#### Initializer <a name="Initializer" id="cdk-cloudfront-redirector.CustomPath.Initializer"></a>
+
+```typescript
+import { CustomPath } from 'cdk-cloudfront-redirector'
+
+const customPath: CustomPath = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-cloudfront-redirector.CustomPath.property.destination">destination</a></code> | <code>string</code> | Destination URL for the custom redirection. |
+| <code><a href="#cdk-cloudfront-redirector.CustomPath.property.path">path</a></code> | <code>string</code> | Path on the Redirector Distribution's URL Back-Half. |
+
+---
+
+##### `destination`<sup>Required</sup> <a name="destination" id="cdk-cloudfront-redirector.CustomPath.property.destination"></a>
+
+```typescript
+public readonly destination: string;
+```
+
+- *Type:* string
+
+Destination URL for the custom redirection.
+
+---
+
+*Example*
+
+```typescript
+"https://ssennett.net/"
+```
+
+
+##### `path`<sup>Required</sup> <a name="path" id="cdk-cloudfront-redirector.CustomPath.property.path"></a>
+
+```typescript
+public readonly path: string;
+```
+
+- *Type:* string
+
+Path on the Redirector Distribution's URL Back-Half.
+
+---
+
+*Example*
+
+```typescript
+"/author"
+```
+
+
 ### RedirectionSiteProps <a name="RedirectionSiteProps" id="cdk-cloudfront-redirector.RedirectionSiteProps"></a>
 
 #### Initializer <a name="Initializer" id="cdk-cloudfront-redirector.RedirectionSiteProps.Initializer"></a>
@@ -198,6 +255,7 @@ const redirectionSiteProps: RedirectionSiteProps = { ... }
 | --- | --- | --- |
 | <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.targetUrl">targetUrl</a></code> | <code>string</code> | Destination URL for all redirections. |
 | <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.customDomain">customDomain</a></code> | <code><a href="#cdk-cloudfront-redirector.CustomDomainProps">CustomDomainProps</a></code> | Custom Domain for the redirector to use (Optional). |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.pathRedirects">pathRedirects</a></code> | <code><a href="#cdk-cloudfront-redirector.CustomPath">CustomPath</a>[]</code> | List of custom back-halves for specific redirections. |
 
 ---
 
@@ -232,6 +290,28 @@ public readonly customDomain: CustomDomainProps;
 Custom Domain for the redirector to use (Optional).
 
 ---
+
+##### `pathRedirects`<sup>Optional</sup> <a name="pathRedirects" id="cdk-cloudfront-redirector.RedirectionSiteProps.property.pathRedirects"></a>
+
+```typescript
+public readonly pathRedirects: CustomPath[];
+```
+
+- *Type:* <a href="#cdk-cloudfront-redirector.CustomPath">CustomPath</a>[]
+- *Default:* No custom back-half redirections
+
+List of custom back-halves for specific redirections.
+
+Any non-matches will default back to the `targetUrl`.
+
+---
+
+*Example*
+
+```typescript
+- [{ path: "/author", destination: "https://ssennett.net/" }
+```
+
 
 
 

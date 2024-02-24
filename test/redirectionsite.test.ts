@@ -86,3 +86,30 @@ test('Redirection Site - Custom Domain (HostedZone object)', () => {
 
   template.hasResource('AWS::Route53::RecordSet', 1);
 });
+
+test('Redirection Site - Custom Paths', () => {
+  const app = new App();
+  const stack = new Stack(app, 'TestStack');
+
+  new RedirectionSite(stack, 'RedirectionSite', {
+    targetUrl: 'ssennett.net',
+    pathRedirects: [
+      {
+        path: '/repo',
+        destination: 'https://github.com/ssennettau/CloudFrontRedirector-Construct',
+      },
+      {
+        path: '/author',
+        destination: 'https://ssennett.net/',
+      },
+    ],
+  });
+
+  const template = Template.fromStack(stack);
+
+  const templateJson = JSON.stringify(template.toJSON(), null, 4);
+  console.debug(templateJson);
+
+  template.hasResource('AWS::CloudFront::Distribution', 1);
+  template.hasResource('AWS::CloudFront::KeyValueStore', 1);
+});

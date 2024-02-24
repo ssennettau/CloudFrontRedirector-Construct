@@ -32,6 +32,7 @@ jspm_packages/
 .cache
 .DS_Store
 .secrets
+*-ksvdata.json
 /test-reports/
 junit.xml
 /coverage/
