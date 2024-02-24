@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+import * as path from 'path';
 import * as cdk from 'aws-cdk-lib';
 
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
@@ -21,6 +23,13 @@ export interface RedirectionSiteProps {
    * @default - Not configured
    */
   readonly customDomain?: CustomDomainProps;
+  /**
+   * List of custom back-halves for specific redirections. Any non-matches will default back to the `targetUrl`.
+   *
+   * @default - No custom back-half redirections
+   * @example - [{ path: "/author", destination: "https://ssennett.net/" }
+   */
+  readonly pathRedirects?: CustomPath[];
 }
 
 export interface CustomDomainProps {
@@ -38,6 +47,21 @@ export interface CustomDomainProps {
    */
   readonly hostedZone: route53.IHostedZone | string;
   // TODO: Validation
+}
+
+export interface CustomPath {
+  /**
+   * Path on the Redirector Distribution's URL Back-Half
+   *
+   * @example "/author"
+   */
+  readonly path: string;
+  /**
+   * Destination URL for the custom redirection
+   *
+   * @example "https://ssennett.net/"
+   */
+  readonly destination: string;
 }
 
 export class RedirectionSite extends Construct {
@@ -58,20 +82,71 @@ export class RedirectionSite extends Construct {
       hostedZone = props.customDomain?.hostedZone;
     }
 
-    const functionRedirect = new cloudfront.Function(this, 'RedirectFunction', {
-      code: cloudfront.FunctionCode.fromInline(`
-                function handler(event) {
-                    var response = {
-                        statusCode: 302,
-                        statusDescription: "Found",
-                        headers: {
-                            'location': { value: "${props.targetUrl}" },
-                            'cloudfront-functions': { value: "redirect" }
-                        }
-                    };
-                    return response;
+    let redirectFunctionCode = cloudfront.FunctionCode.fromInline(`
+      function handler(event) {
+          var location = "${props.targetUrl}";
+                            
+          var response = {
+              statusCode: 302,
+              statusDescription: "Found",
+              headers: {
+                  'location': { value: location },
+                  'cloudfront-functions': { value: "redirect" }
+              }
+          };
+          return response;
+      }
+    `);
+
+    let kvsRedirectMap: cloudfront.IKeyValueStore | undefined;
+
+    if (props.pathRedirects) {
+      const pathRedirectsFileTemp = path.join(__dirname, 'tempname.json');
+
+      const pathRedirectsDataFileContents = {
+        data: props.pathRedirects.map(pathRedirect => ({
+          key: pathRedirect.path,
+          value: pathRedirect.destination,
+        })),
+      };
+
+      fs.writeFileSync(pathRedirectsFileTemp, JSON.stringify(pathRedirectsDataFileContents));
+
+      kvsRedirectMap = new cloudfront.KeyValueStore(this, 'RedirectMap', {
+        source: cloudfront.ImportSource.fromAsset(pathRedirectsFileTemp),
+      });
+
+      redirectFunctionCode = cloudfront.FunctionCode.fromInline(`
+        import cf from 'cloudfront';
+
+        const kvsId = '${kvsRedirectMap.keyValueStoreId}';
+        const kvsHandle = cf.kvs(kvsId);
+
+        async function handler(event) {
+            const key = event.request.uri
+            let location = "${props.targetUrl}" // Default value
+
+            try {
+                location = await kvsHandle.get(key);
+            } catch (err) {
+                console.log('default');
+            }
+            var response = {
+                statusCode: 302,
+                statusDescription: "Found",
+                headers: {
+                    'location': { value: location },
+                    'cloudfront-functions': { value: "redirect" }
                 }
-            `),
+            };
+            return response;
+        }
+      `);
+    }
+
+    const functionRedirect = new cloudfront.Function(this, 'RedirectFunction', {
+      code: redirectFunctionCode,
+      keyValueStore: props.pathRedirects ? kvsRedirectMap : undefined,
       runtime: cloudfront.FunctionRuntime.JS_2_0,
     });
 
