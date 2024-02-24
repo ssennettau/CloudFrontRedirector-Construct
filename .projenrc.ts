@@ -18,7 +18,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   license: 'MIT',
   gitignore: [
-    '.DS_Store',
+    '.DS_Store', // Default Mac OS attribs
+    '.secrets', // For running GH Actions locally
   ],
 });
 project.synth();
