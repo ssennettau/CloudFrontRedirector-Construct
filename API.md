@@ -139,8 +139,8 @@ const customDomainProps: CustomDomainProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cdk-cloudfront-redirector.CustomDomainProps.property.domainName">domainName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cdk-cloudfront-redirector.CustomDomainProps.property.hostedZone">hostedZone</a></code> | <code>string \| aws-cdk-lib.aws_route53.IHostedZone</code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.CustomDomainProps.property.domainName">domainName</a></code> | <code>string</code> | Domain name to use for the redirector (used as the record set name). |
+| <code><a href="#cdk-cloudfront-redirector.CustomDomainProps.property.hostedZone">hostedZone</a></code> | <code>string \| aws-cdk-lib.aws_route53.IHostedZone</code> | Hosted Zone to use for the redirector (used as the record set zone). |
 
 ---
 
@@ -152,7 +152,16 @@ public readonly domainName: string;
 
 - *Type:* string
 
+Domain name to use for the redirector (used as the record set name).
+
 ---
+
+*Example*
+
+```typescript
+"i.redir.net"
+```
+
 
 ##### `hostedZone`<sup>Required</sup> <a name="hostedZone" id="cdk-cloudfront-redirector.CustomDomainProps.property.hostedZone"></a>
 
@@ -162,7 +171,16 @@ public readonly hostedZone: string | IHostedZone;
 
 - *Type:* string | aws-cdk-lib.aws_route53.IHostedZone
 
+Hosted Zone to use for the redirector (used as the record set zone).
+
 ---
+
+*Example*
+
+```typescript
+"redir.net"@note[object Object]
+```
+
 
 ### RedirectionSiteProps <a name="RedirectionSiteProps" id="cdk-cloudfront-redirector.RedirectionSiteProps"></a>
 
@@ -178,8 +196,8 @@ const redirectionSiteProps: RedirectionSiteProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.targetUrl">targetUrl</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.customDomain">customDomain</a></code> | <code><a href="#cdk-cloudfront-redirector.CustomDomainProps">CustomDomainProps</a></code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.targetUrl">targetUrl</a></code> | <code>string</code> | Destination URL for all redirections. |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.customDomain">customDomain</a></code> | <code><a href="#cdk-cloudfront-redirector.CustomDomainProps">CustomDomainProps</a></code> | Custom Domain for the redirector to use (Optional). |
 
 ---
 
@@ -191,7 +209,16 @@ public readonly targetUrl: string;
 
 - *Type:* string
 
+Destination URL for all redirections.
+
 ---
+
+*Example*
+
+```typescript
+https://mysite.com/
+```
+
 
 ##### `customDomain`<sup>Optional</sup> <a name="customDomain" id="cdk-cloudfront-redirector.RedirectionSiteProps.property.customDomain"></a>
 
@@ -200,6 +227,9 @@ public readonly customDomain: CustomDomainProps;
 ```
 
 - *Type:* <a href="#cdk-cloudfront-redirector.CustomDomainProps">CustomDomainProps</a>
+- *Default:* Not configured
+
+Custom Domain for the redirector to use (Optional).
 
 ---
 

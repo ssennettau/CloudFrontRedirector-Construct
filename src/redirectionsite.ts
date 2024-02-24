@@ -9,12 +9,33 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 
 export interface RedirectionSiteProps {
+  /**
+   * Destination URL for all redirections
+   *
+   * @example https://mysite.com/
+   */
   readonly targetUrl: string;
+  /**
+   * Custom Domain for the redirector to use (Optional)
+   *
+   * @default - Not configured
+   */
   readonly customDomain?: CustomDomainProps;
 }
 
 export interface CustomDomainProps {
+  /**
+   * Domain name to use for the redirector (used as the record set name)
+   *
+   * @example "i.redir.net"
+   */
   readonly domainName: string;
+  /**
+   * Hosted Zone to use for the redirector (used as the record set zone)
+   *
+   * @example "redir.net"
+   * @note If not set, the domain name will be used as the hosted zone name
+   */
   readonly hostedZone: route53.IHostedZone | string;
   // TODO: Validation
 }
@@ -82,7 +103,13 @@ export class RedirectionSite extends Construct {
       });
     }
 
+    /**
+     * URL of the CloudFront Distribution that has been generated
+     */
     this.cfDistributionUrl = `https://${distribution.domainName}`;
+    /**
+     * URL of the Redirector site. Either returns the custom domain, or else returns the CloudFront Distribution URL
+     */
     this.url = props.customDomain ? `https://${props.customDomain.domainName}` : this.cfDistributionUrl;
   }
 }

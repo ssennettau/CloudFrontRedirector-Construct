@@ -6,18 +6,18 @@ CDK Construct to simplify using CloudFront to redirect entire domains or back-ha
 
 Needs to redirect domains or building custom link shorteners is a common pattern required by many different solutions. This project simplifies using Amazon CloudFront with CloudFront Functions to rewrite the requests, forwarding users to another location.
 
-<<< TODO: diagram >>>
+![CloudFront Redirector Construct Diagram](docs/cfredirector.png)
 
 ## Usage
 
-<<< TODO: Features >>>
+For more details, check the auto-generated [API](API.md).
 
 ### Installation 
 Before using this construct, you will need to import it for use in your AWS CDK stack.
 
 ```bash
 # CDK for Typescript
-npm install @ssennettau/cdk-cloudfront-redirector
+npm install cdk-cloudfront-redirector
 ```
 
 ### Integrating
