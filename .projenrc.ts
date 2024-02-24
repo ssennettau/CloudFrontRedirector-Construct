@@ -8,7 +8,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkVersion: cdkVersion,
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.2.0',
-  name: 'cloudfrontredirector',
+  name: 'cdk-cloudfront-redirector',
   projenrcTs: true,
   repositoryUrl: 'https://github.com/ssennett/CloudFrontRedirector-Construct.git',
   description: 'CDK Construct to simplify using CloudFront to redirect entire domains or back-half stubs',
@@ -18,7 +18,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
   license: 'MIT',
   gitignore: [
-    '.DS_Store'
-  ]
+    '.DS_Store',
+  ],
 });
 project.synth();

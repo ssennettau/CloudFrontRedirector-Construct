@@ -2,39 +2,39 @@
 
 ## Constructs <a name="Constructs" id="Constructs"></a>
 
-### RedirectionSite <a name="RedirectionSite" id="cloudfrontredirector.RedirectionSite"></a>
+### RedirectionSite <a name="RedirectionSite" id="cdk-cloudfront-redirector.RedirectionSite"></a>
 
-#### Initializers <a name="Initializers" id="cloudfrontredirector.RedirectionSite.Initializer"></a>
+#### Initializers <a name="Initializers" id="cdk-cloudfront-redirector.RedirectionSite.Initializer"></a>
 
 ```typescript
-import { RedirectionSite } from 'cloudfrontredirector'
+import { RedirectionSite } from 'cdk-cloudfront-redirector'
 
 new RedirectionSite(scope: Construct, id: string, props: RedirectionSiteProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cloudfrontredirector.RedirectionSite.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#cloudfrontredirector.RedirectionSite.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cloudfrontredirector.RedirectionSite.Initializer.parameter.props">props</a></code> | <code><a href="#cloudfrontredirector.RedirectionSiteProps">RedirectionSiteProps</a></code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSite.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSite.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSite.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps">RedirectionSiteProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="cloudfrontredirector.RedirectionSite.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="cdk-cloudfront-redirector.RedirectionSite.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="cloudfrontredirector.RedirectionSite.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="cdk-cloudfront-redirector.RedirectionSite.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="cloudfrontredirector.RedirectionSite.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="cdk-cloudfront-redirector.RedirectionSite.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#cloudfrontredirector.RedirectionSiteProps">RedirectionSiteProps</a>
+- *Type:* <a href="#cdk-cloudfront-redirector.RedirectionSiteProps">RedirectionSiteProps</a>
 
 ---
 
@@ -42,11 +42,11 @@ new RedirectionSite(scope: Construct, id: string, props: RedirectionSiteProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#cloudfrontredirector.RedirectionSite.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSite.toString">toString</a></code> | Returns a string representation of this construct. |
 
 ---
 
-##### `toString` <a name="toString" id="cloudfrontredirector.RedirectionSite.toString"></a>
+##### `toString` <a name="toString" id="cdk-cloudfront-redirector.RedirectionSite.toString"></a>
 
 ```typescript
 public toString(): string
@@ -58,21 +58,21 @@ Returns a string representation of this construct.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#cloudfrontredirector.RedirectionSite.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSite.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="cloudfrontredirector.RedirectionSite.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="cdk-cloudfront-redirector.RedirectionSite.isConstruct"></a>
 
 ```typescript
-import { RedirectionSite } from 'cloudfrontredirector'
+import { RedirectionSite } from 'cdk-cloudfront-redirector'
 
 RedirectionSite.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="cloudfrontredirector.RedirectionSite.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="cdk-cloudfront-redirector.RedirectionSite.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -84,13 +84,13 @@ Any object.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cloudfrontredirector.RedirectionSite.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#cloudfrontredirector.RedirectionSite.property.cfDistributionUrl">cfDistributionUrl</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cloudfrontredirector.RedirectionSite.property.url">url</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSite.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSite.property.cfDistributionUrl">cfDistributionUrl</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSite.property.url">url</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="cloudfrontredirector.RedirectionSite.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="cdk-cloudfront-redirector.RedirectionSite.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -102,7 +102,7 @@ The tree node.
 
 ---
 
-##### `cfDistributionUrl`<sup>Required</sup> <a name="cfDistributionUrl" id="cloudfrontredirector.RedirectionSite.property.cfDistributionUrl"></a>
+##### `cfDistributionUrl`<sup>Required</sup> <a name="cfDistributionUrl" id="cdk-cloudfront-redirector.RedirectionSite.property.cfDistributionUrl"></a>
 
 ```typescript
 public readonly cfDistributionUrl: string;
@@ -112,7 +112,7 @@ public readonly cfDistributionUrl: string;
 
 ---
 
-##### `url`<sup>Required</sup> <a name="url" id="cloudfrontredirector.RedirectionSite.property.url"></a>
+##### `url`<sup>Required</sup> <a name="url" id="cdk-cloudfront-redirector.RedirectionSite.property.url"></a>
 
 ```typescript
 public readonly url: string;
@@ -125,12 +125,12 @@ public readonly url: string;
 
 ## Structs <a name="Structs" id="Structs"></a>
 
-### CustomDomainProps <a name="CustomDomainProps" id="cloudfrontredirector.CustomDomainProps"></a>
+### CustomDomainProps <a name="CustomDomainProps" id="cdk-cloudfront-redirector.CustomDomainProps"></a>
 
-#### Initializer <a name="Initializer" id="cloudfrontredirector.CustomDomainProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="cdk-cloudfront-redirector.CustomDomainProps.Initializer"></a>
 
 ```typescript
-import { CustomDomainProps } from 'cloudfrontredirector'
+import { CustomDomainProps } from 'cdk-cloudfront-redirector'
 
 const customDomainProps: CustomDomainProps = { ... }
 ```
@@ -139,12 +139,12 @@ const customDomainProps: CustomDomainProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cloudfrontredirector.CustomDomainProps.property.domainName">domainName</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cloudfrontredirector.CustomDomainProps.property.hostedZone">hostedZone</a></code> | <code>string \| aws-cdk-lib.aws_route53.IHostedZone</code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.CustomDomainProps.property.domainName">domainName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.CustomDomainProps.property.hostedZone">hostedZone</a></code> | <code>string \| aws-cdk-lib.aws_route53.IHostedZone</code> | *No description.* |
 
 ---
 
-##### `domainName`<sup>Required</sup> <a name="domainName" id="cloudfrontredirector.CustomDomainProps.property.domainName"></a>
+##### `domainName`<sup>Required</sup> <a name="domainName" id="cdk-cloudfront-redirector.CustomDomainProps.property.domainName"></a>
 
 ```typescript
 public readonly domainName: string;
@@ -154,7 +154,7 @@ public readonly domainName: string;
 
 ---
 
-##### `hostedZone`<sup>Required</sup> <a name="hostedZone" id="cloudfrontredirector.CustomDomainProps.property.hostedZone"></a>
+##### `hostedZone`<sup>Required</sup> <a name="hostedZone" id="cdk-cloudfront-redirector.CustomDomainProps.property.hostedZone"></a>
 
 ```typescript
 public readonly hostedZone: string | IHostedZone;
@@ -164,12 +164,12 @@ public readonly hostedZone: string | IHostedZone;
 
 ---
 
-### RedirectionSiteProps <a name="RedirectionSiteProps" id="cloudfrontredirector.RedirectionSiteProps"></a>
+### RedirectionSiteProps <a name="RedirectionSiteProps" id="cdk-cloudfront-redirector.RedirectionSiteProps"></a>
 
-#### Initializer <a name="Initializer" id="cloudfrontredirector.RedirectionSiteProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="cdk-cloudfront-redirector.RedirectionSiteProps.Initializer"></a>
 
 ```typescript
-import { RedirectionSiteProps } from 'cloudfrontredirector'
+import { RedirectionSiteProps } from 'cdk-cloudfront-redirector'
 
 const redirectionSiteProps: RedirectionSiteProps = { ... }
 ```
@@ -178,12 +178,12 @@ const redirectionSiteProps: RedirectionSiteProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cloudfrontredirector.RedirectionSiteProps.property.targetUrl">targetUrl</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cloudfrontredirector.RedirectionSiteProps.property.customDomain">customDomain</a></code> | <code><a href="#cloudfrontredirector.CustomDomainProps">CustomDomainProps</a></code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.targetUrl">targetUrl</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-cloudfront-redirector.RedirectionSiteProps.property.customDomain">customDomain</a></code> | <code><a href="#cdk-cloudfront-redirector.CustomDomainProps">CustomDomainProps</a></code> | *No description.* |
 
 ---
 
-##### `targetUrl`<sup>Required</sup> <a name="targetUrl" id="cloudfrontredirector.RedirectionSiteProps.property.targetUrl"></a>
+##### `targetUrl`<sup>Required</sup> <a name="targetUrl" id="cdk-cloudfront-redirector.RedirectionSiteProps.property.targetUrl"></a>
 
 ```typescript
 public readonly targetUrl: string;
@@ -193,13 +193,13 @@ public readonly targetUrl: string;
 
 ---
 
-##### `customDomain`<sup>Optional</sup> <a name="customDomain" id="cloudfrontredirector.RedirectionSiteProps.property.customDomain"></a>
+##### `customDomain`<sup>Optional</sup> <a name="customDomain" id="cdk-cloudfront-redirector.RedirectionSiteProps.property.customDomain"></a>
 
 ```typescript
 public readonly customDomain: CustomDomainProps;
 ```
 
-- *Type:* <a href="#cloudfrontredirector.CustomDomainProps">CustomDomainProps</a>
+- *Type:* <a href="#cdk-cloudfront-redirector.CustomDomainProps">CustomDomainProps</a>
 
 ---
 
