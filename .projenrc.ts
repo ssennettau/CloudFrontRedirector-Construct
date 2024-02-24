@@ -20,6 +20,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   gitignore: [
     '.DS_Store', // Default Mac OS attribs
     '.secrets', // For running GH Actions locally
+    '*-ksvdata.json', // KeyStoreValues for Path redirects
   ],
 });
 project.synth();

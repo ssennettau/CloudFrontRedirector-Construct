@@ -101,7 +101,9 @@ export class RedirectionSite extends Construct {
     let kvsRedirectMap: cloudfront.IKeyValueStore | undefined;
 
     if (props.pathRedirects) {
-      const pathRedirectsFileTemp = path.join(__dirname, 'tempname.json');
+      // Create a temp file with a unique name
+      const tempDirectory = cdk.FileSystem.mkdtemp('ksvdata');
+      const pathRedirectsFileTemp = path.join(tempDirectory, cdk.Names.uniqueId(this) + '-ksvdata.json');
 
       const pathRedirectsDataFileContents = {
         data: props.pathRedirects.map(pathRedirect => ({
