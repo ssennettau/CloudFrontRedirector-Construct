@@ -114,7 +114,7 @@ export class RedirectionSite extends Construct {
 
       fs.writeFileSync(pathRedirectsFileTemp, JSON.stringify(pathRedirectsDataFileContents));
 
-      kvsRedirectMap = new cloudfront.KeyValueStore(this, 'RedirectMap', {
+      kvsRedirectMap = new cloudfront.KeyValueStore(this, this.uniqueName('RedirectMap'), {
         source: cloudfront.ImportSource.fromAsset(pathRedirectsFileTemp),
       });
 
@@ -188,5 +188,15 @@ export class RedirectionSite extends Construct {
      * URL of the Redirector site. Either returns the custom domain, or else returns the CloudFront Distribution URL
      */
     this.url = props.customDomain ? `https://${props.customDomain.domainName}` : this.cfDistributionUrl;
+  }
+
+  /**
+   * Internal use, intended to woarkound a bug with cloudfront.KeyStoreValue's renaming (issue #2)
+   * @param {string} name - Name of the resource to be given a random hex suffix
+   * @returns {string} Name with random hex suffix
+   */
+  private uniqueName(name: string): string {
+    const randomHex = Math.random().toString(16).substring(2, 6).toUpperCase();
+    return name + randomHex.padStart(4, '0');
   }
 }
