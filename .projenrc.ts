@@ -17,6 +17,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'cdk-construct',
   ],
   license: 'MIT',
+  licensed: true,
   gitignore: [
     '.DS_Store', // Default Mac OS attribs
     '.secrets', // For running GH Actions locally
@@ -30,7 +31,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   autoApproveUpgrades: true,
   autoApproveOptions: {
-    allowedUsernames: ['github-actions']
+    allowedUsernames: ['github-actions'],
   },
 });
 project.synth();
