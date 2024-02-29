@@ -22,5 +22,15 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '.secrets', // For running GH Actions locally
     '*-ksvdata.json', // KeyStoreValues for Path redirects
   ],
+  depsUpgrade: true,
+  depsUpgradeOptions: {
+    workflowOptions: {
+      labels: ['auto-approve, auto-merge'],
+    }
+  },
+  autoApproveUpgrades: true,
+  autoApproveOptions: {
+    allowedUsernames: ['github-actions']
+  },
 });
 project.synth();
