@@ -27,7 +27,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   depsUpgradeOptions: {
     workflowOptions: {
       labels: ['auto-approve, auto-merge'],
-    }
+    },
   },
   autoApproveUpgrades: true,
   autoApproveOptions: {
