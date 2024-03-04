@@ -33,7 +33,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   autoApproveOptions: {
     allowedUsernames: [
       'github-actions',
-      'ssennett',
+      'ssennettau',
     ],
   },
 });
