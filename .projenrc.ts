@@ -31,7 +31,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   autoApproveUpgrades: true,
   autoApproveOptions: {
-    allowedUsernames: ['github-actions'],
+    allowedUsernames: [
+      'github-actions',
+      'ssennett',
+    ],
   },
 });
 project.synth();

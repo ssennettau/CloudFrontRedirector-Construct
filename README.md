@@ -1,6 +1,6 @@
 # CloudFrontRedirector-Construct
 
-CDK Construct to simplify using CloudFront to redirect entire domains or back-half stubs.
+CDK Construct to simplify using CloudFront to redirect entire domains or back-half stubs. Published as `cdk-cloudfront-redirector` ([NPM](https://www.npmjs.com/package/cdk-cloudfront-redirector))
 
 ![GitHub Release](https://img.shields.io/github/v/release/ssennettau/CloudFrontRedirector-Construct) ![NPM Downloads](https://img.shields.io/npm/dw/cdk-cloudfront-redirector)
 
